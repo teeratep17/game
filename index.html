@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="th" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ป่าหิมพานต์แห่งรสชาติ</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&amp;family=Kanit:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Sarabun', sans-serif; }
+    .title-font { font-family: 'Kanit', sans-serif; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 183, 77, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(255, 183, 77, 0.8); }
+    }
+    
+    @keyframes mortar-shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-3deg); }
+      75% { transform: rotate(3deg); }
+    }
+    
+    @keyframes ingredient-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    @keyframes success-burst {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes leaf-fall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(100px) rotate(360deg); opacity: 0; }
+    }
+    
+    .float-animation { animation: float 3s ease-in-out infinite; }
+    .sparkle { animation: sparkle 2s ease-in-out infinite; }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .mortar-shake { animation: mortar-shake 0.5s ease-in-out; }
+    .ingredient-bounce { animation: ingredient-bounce 0.6s ease-in-out; }
+    .success-burst { animation: success-burst 0.5s ease-out forwards; }
+    
+    .forest-bg {
+      background: linear-gradient(180deg, 
+        #0d2818 0%, 
+        #1a4d2e 30%, 
+        #2d5a3d 60%, 
+        #1f4a2c 100%);
+    }
+    
+    .mystical-card {
+      background: linear-gradient(145deg, #2a1810 0%, #4a2c1a 50%, #3d2415 100%);
+      border: 3px solid #d4a574;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    
+    .ingredient-card {
+      background: linear-gradient(145deg, #f5e6d3 0%, #e8d4b8 100%);
+      border: 2px solid #c9a66b;
+      transition: all 0.3s ease;
+    }
+    
+    .ingredient-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    
+    .step-indicator {
+      background: linear-gradient(145deg, #8b4513 0%, #a0522d 100%);
+      border: 2px solid #d4a574;
+    }
+    
+    .step-indicator.active {
+      background: linear-gradient(145deg, #ff8c00 0%, #ffa500 100%);
+      box-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+    }
+    
+    .step-indicator.completed {
+      background: linear-gradient(145deg, #228b22 0%, #32cd32 100%);
+    }
+    
+    .input-mystical {
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+      border: 2px solid #d4a574;
+      color: #ffd700;
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 0.5rem;
+    }
+    
+    .btn-submit {
+      background: linear-gradient(145deg, #8b0000 0%, #dc143c 50%, #8b0000 100%);
+      border: 2px solid #ffd700;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-submit:hover:not(:disabled) {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(220, 20, 60, 0.6);
+    }
+    
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .mortar-container {
+      position: relative;
+    }
+    
+    .falling-leaf {
+      position: absolute;
+      animation: leaf-fall 3s linear forwards;
+      pointer-events: none;
+    }
+    
+    .poem-scroll {
+      background: linear-gradient(145deg, #f4e4bc 0%, #e8d4a8 50%, #dcc496 100%);
+      border: 3px solid #8b4513;
+      box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.2);
+    }
+    
+    .card-piece {
+      background: linear-gradient(145deg, #ffd700 0%, #ffb347 50%, #ffa500 100%);
+      border: 3px solid #8b4513;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .final-code-display {
+      background: linear-gradient(145deg, #1a0a00 0%, #2d1810 100%);
+      border: 4px solid #ffd700;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full forest-bg overflow-auto">
+  <div id="app" class="min-h-full w-full"><!-- Intro Screen -->
+   <div id="intro-screen" class="min-h-full flex flex-col items-center justify-center p-4 relative overflow-hidden"><!-- Floating particles -->
+    <div class="absolute inset-0 pointer-events-none">
+     <div class="absolute top-20 left-10 w-3 h-3 bg-yellow-400 rounded-full sparkle" style="animation-delay: 0s;"></div>
+     <div class="absolute top-40 right-20 w-2 h-2 bg-green-300 rounded-full sparkle" style="animation-delay: 0.5s;"></div>
+     <div class="absolute bottom-40 left-20 w-4 h-4 bg-orange-400 rounded-full sparkle" style="animation-delay: 1s;"></div>
+     <div class="absolute top-60 right-10 w-2 h-2 bg-yellow-300 rounded-full sparkle" style="animation-delay: 1.5s;"></div>
+    </div>
+    <div class="text-center z-10 max-w-2xl mx-auto">
+     <div class="mb-6 float-animation"><span class="text-8xl">🏔️</span>
+     </div>
+     <h1 id="game-title" class="title-font text-4xl md:text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">ป่าหิมพานต์แห่งรสชาติ</h1>
+     <p class="text-green-200 text-lg md:text-xl mb-6 leading-relaxed">หินวิญญาณชี้นำมาสู่ป่าศักดิ์สิทธิ์<br>
+       ที่นี่มี <span class="text-yellow-400 font-bold">"ครกศักดิ์สิทธิ์"</span> ถูกผนึกไว้<br>
+       จงปรุง <span class="text-orange-400 font-bold">"ส้มตำในตำนานแห่งอีสาน"</span><br>
+       เพื่อฟื้นฟูโลกให้กลับคืนมา</p>
+     <div class="mystical-card rounded-2xl p-6 mb-8 max-w-md mx-auto">
+      <div class="flex justify-center gap-4 mb-4"><span class="text-5xl">🌶️</span> <span class="text-5xl">🥜</span> <span class="text-5xl">🍋</span>
+      </div>
+      <p class="text-amber-200 text-sm">รวบรวมวัตถุดิบวิเศษ • ถอดรหัสกลอนโบราณ • ปรุงส้มตำในตำนาน</p>
+     </div><button onclick="startGame()" class="btn-submit px-10 py-4 rounded-full text-white text-xl font-bold title-font"> 🍃 เริ่มต้นการผจญภัย 🍃 </button>
+    </div>
+   </div><!-- Game Screen -->
+   <div id="game-screen" class="hidden min-h-full p-4">
+    <div class="max-w-6xl mx-auto"><!-- Header -->
+     <div class="text-center mb-6">
+      <h2 class="title-font text-2xl md:text-3xl text-yellow-400 font-bold mb-2">🏺 ครกศักดิ์สิทธิ์ 🏺</h2>
+      <p class="text-green-200">ทำตามขั้นตอนให้ครบเพื่อปรุงส้มตำในตำนาน</p>
+     </div><!-- Step Progress -->
+     <div class="flex justify-center gap-2 md:gap-4 mb-6 flex-wrap">
+      <div id="step-1" class="step-indicator w-20 md:w-24 py-2 rounded-lg text-center cursor-pointer transition-all" onclick="selectStep(0)">
+       <div class="text-xl md:text-2xl">
+        🔪
+       </div>
+       <div class="text-xs text-white font-bold">
+        สับ
+       </div>
+       <div class="text-xs text-yellow-200">
+        (การ์ด 6)
+       </div>
+      </div>
+      <div id="step-2" class="step-indicator w-20 md:w-24 py-2 rounded-lg text-center cursor-pointer transition-all opacity-50" onclick="selectStep(1)">
+       <div class="text-xl md:text-2xl">
+        🪨
+       </div>
+       <div class="text-xs text-white font-bold">
+        โขลก
+       </div>
+       <div class="text-xs text-yellow-200">
+        (การ์ด 7)
+       </div>
+      </div>
+      <div id="step-3" class="step-indicator w-20 md:w-24 py-2 rounded-lg text-center cursor-pointer transition-all opacity-50" onclick="selectStep(2)">
+       <div class="text-xl md:text-2xl">
+        🫗
+       </div>
+       <div class="text-xs text-white font-bold">
+        ปรุง
+       </div>
+       <div class="text-xs text-yellow-200">
+        (การ์ด 8)
+       </div>
+      </div>
+      <div id="step-4" class="step-indicator w-20 md:w-24 py-2 rounded-lg text-center cursor-pointer transition-all opacity-50" onclick="selectStep(3)">
+       <div class="text-xl md:text-2xl">
+        🥢
+       </div>
+       <div class="text-xs text-white font-bold">
+        ตำ
+       </div>
+       <div class="text-xs text-yellow-200">
+        (การ์ด 9)
+       </div>
+      </div>
+     </div>
+     <div class="grid md:grid-cols-2 gap-6"><!-- Left: Poem & Input -->
+      <div class="space-y-4"><!-- Current Step Info -->
+       <div class="mystical-card rounded-2xl p-4">
+        <div class="flex items-center gap-3 mb-3"><span id="current-step-icon" class="text-4xl">🔪</span>
+         <div>
+          <h3 id="current-step-name" class="title-font text-xl text-yellow-400 font-bold">ขั้นตอน: สับ</h3>
+          <p id="current-step-card" class="text-amber-200 text-sm">การ์ดกลอนเลข 6</p>
+         </div>
+        </div><!-- Poem Scroll -->
+        <div id="poem-scroll" class="poem-scroll rounded-xl p-4 mb-4">
+         <p id="poem-text" class="text-brown-800 text-center leading-relaxed" style="color: #4a2c1a;">"มีดคมกริบ จับมะละกอ<br>
+           สับให้เป็นเส้น งามตา<br>
+           นี่คือจุดเริ่มต้น แห่งรสชาติ"</p>
+        </div><!-- Hint -->
+        <div class="bg-green-900/50 rounded-lg p-3 mb-4">
+         <p class="text-green-200 text-sm">💡 <span class="font-bold">คำใบ้:</span> <span id="hint-text">ดูวัตถุดิบที่กล่าวถึงในกลอน แล้วนำตัวเลขมาเรียงตามลำดับ</span></p>
+        </div><!-- Code Input -->
+        <div class="space-y-3"><label class="text-yellow-400 font-bold block text-center">ใส่รหัสวัตถุดิบ</label> <input type="text" id="code-input" class="input-mystical w-full py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="???" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')"> <button id="submit-btn" onclick="submitCode()" class="btn-submit w-full py-3 rounded-xl text-white font-bold text-lg"> ✨ ยืนยันรหัส ✨ </button>
+        </div><!-- Feedback -->
+        <div id="feedback" class="mt-4 text-center hidden">
+         <p id="feedback-text" class="text-lg font-bold"></p>
+        </div>
+       </div>
+      </div><!-- Right: Ingredients Reference -->
+      <div class="space-y-4"><!-- Mortar Display -->
+       <div class="mystical-card rounded-2xl p-4 text-center mortar-container">
+        <div id="mortar" class="text-7xl mb-2">
+         🏺
+        </div>
+        <div id="mortar-contents" class="flex justify-center gap-2 flex-wrap min-h-[40px]"><!-- Ingredients will appear here -->
+        </div>
+       </div><!-- Ingredients Grid -->
+       <div class="mystical-card rounded-2xl p-4">
+        <h4 class="title-font text-lg text-yellow-400 font-bold mb-3 text-center">📜 ตารางวัตถุดิบวิเศษ</h4>
+        <div class="grid grid-cols-4 gap-2">
+         <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('พริก', 4)">
+          <div class="text-2xl">
+           🌶️
+          </div>
+          <div class="text-xs font-bold text-amber-900">
+           พริก
+          </div>
+          <div class="text-lg font-bold text-red-600">
+           4
+          </div>
+         </div>
+         <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('กระเทียม', 3)">
+          <div class="text-2xl">
+           🧄
+          </div>
+          <div class="text-xs font-bold text-amber-900">
+           กระเทียม
+          </div>
+          <div class="text-lg font-bold text-red-600">
+           3
+          </div>
+         </div>
+         <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('ปลาร้า', 5)">
+          <div class="text-2xl">
+           🐟
+          </div>
+          <div class="text-xs font-bold text-amber-900">
+           ปลาร้า
+          </div>
+          <div class="text-lg font-bold text-red-600">
+           5
+          </div>
+         </div>
+         <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('น้ำมะนาว', 9)">
+          <div class="text-2xl">
+           🍋
+          </div>
+          <div class="text-xs font-bold text-amber-900">
+           น้ำมะนาว
+          </div>
+          <div class="text-lg font-bold text-red-600">
+           9
+          </div>
+         </div>
+         <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('น้ำตาล', 0)">
+          <div class="text-2xl">
+           🍬
+          </div>
+          <div class="text-xs font-bold text-amber-900">
+           น้ำตาล
+          </div>
+          <div class="text-lg font-bold text-red-600">
+           0
+          </div>
+         </div>
+         <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('มะละกอ', 2)">
+          <div class="text-2xl">
+           🥒
+          </div>
+          <div class="text-xs font-bold text-amber-900">
+           มะละกอ
+          </div>
+          <div class="text-lg font-bold text-red-600">
+           2
+          </div>
+         </div>
+         <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('ถั่วลิสง', 1)">
+          <div class="text-2xl">
+           🥜
+          </div>
+          <div class="text-xs font-bold text-amber-900">
+           ถั่วลิสง
+          </div>
+          <div class="text-lg font-bold text-red-600">
+           1
+          </div>
+         </div>
+         <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('มีด', 8)">
+          <div class="text-2xl">
+           🔪
+          </div>
+          <div class="text-xs font-bold text-amber-900">
+           มีด
+          </div>
+          <div class="text-lg font-bold text-red-600">
+           8
+          </div>
+         </div>
+        </div>
+       </div><!-- Collected Cards -->
+       <div class="mystical-card rounded-2xl p-4">
+        <h4 class="title-font text-lg text-yellow-400 font-bold mb-3 text-center">🎴 การ์ดชิ้นส่วนที่สะสม</h4>
+        <div id="collected-cards" class="flex justify-center gap-3 flex-wrap min-h-[60px]">
+         <p class="text-amber-200/50 text-sm">ยังไม่มีการ์ด</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Victory Screen -->
+   <div id="victory-screen" class="hidden min-h-full flex flex-col items-center justify-center p-4 relative overflow-hidden"><!-- Celebration particles -->
+    <div class="absolute inset-0 pointer-events-none" id="celebration-particles"></div>
+    <div class="text-center z-10 max-w-lg mx-auto">
+     <div class="mb-6 success-burst"><span class="text-8xl">🥗</span>
+     </div>
+     <h2 class="title-font text-3xl md:text-4xl text-yellow-400 font-bold mb-4">ส้มตำในตำนานสำเร็จแล้ว!</h2>
+     <p class="text-green-200 text-lg mb-6">พลังแห่งรสชาติได้ฟื้นคืนสู่โลก<br>
+       ครกศักดิ์สิทธิ์ส่องแสงเจิดจ้า</p><!-- Final Code Display -->
+     <div class="final-code-display rounded-2xl p-6 mb-6">
+      <p class="text-amber-200 text-sm mb-2">รหัสปลดล็อกกล่อง</p>
+      <div class="flex justify-center gap-2"><span class="text-5xl md:text-6xl font-bold text-yellow-400 title-font">1</span> <span class="text-5xl md:text-6xl font-bold text-yellow-400 title-font">2</span> <span class="text-5xl md:text-6xl font-bold text-yellow-400 title-font">7</span>
+      </div>
+      <p class="text-amber-200 text-xs mt-2">( 84 + 85 + 86 + 87 = 342 → หลักหน่วยคือ 127 )</p>
+     </div><!-- Collected Cards Summary -->
+     <div class="mystical-card rounded-2xl p-4 mb-6">
+      <h4 class="text-yellow-400 font-bold mb-3">การ์ดที่สะสมได้ทั้งหมด</h4>
+      <div class="flex justify-center gap-3">
+       <div class="card-piece w-14 h-20 rounded-lg flex items-center justify-center"><span class="text-2xl font-bold text-amber-900">84</span>
+       </div>
+       <div class="card-piece w-14 h-20 rounded-lg flex items-center justify-center"><span class="text-2xl font-bold text-amber-900">85</span>
+       </div>
+       <div class="card-piece w-14 h-20 rounded-lg flex items-center justify-center"><span class="text-2xl font-bold text-amber-900">86</span>
+       </div>
+       <div class="card-piece w-14 h-20 rounded-lg flex items-center justify-center"><span class="text-2xl font-bold text-amber-900">87</span>
+       </div>
+      </div>
+     </div><button onclick="restartGame()" class="btn-submit px-8 py-3 rounded-full text-white text-lg font-bold"> 🔄 เล่นใหม่อีกครั้ง </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Game Configuration
+    const defaultConfig = {
+      game_title: 'ป่าหิมพานต์แห่งรสชาติ',
+      primary_color: '#ffd700',
+      secondary_color: '#1a4d2e',
+      accent_color: '#dc143c',
+      text_color: '#fef3c7',
+      surface_color: '#2a1810'
+    };
+    
+    let config = { ...defaultConfig };
+    
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...config, ...newConfig };
+          applyConfig();
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['game_title', cfg.game_title || defaultConfig.game_title]
+        ])
+      });
+    }
+    
+    function applyConfig() {
+      const titleEl = document.getElementById('game-title');
+      if (titleEl) titleEl.textContent = config.game_title || defaultConfig.game_title;
+    }
+    
+    // Game State
+    const gameState = {
+      currentStep: 0,
+      completedSteps: [false, false, false, false],
+      collectedCards: [],
+      stepOrder: ['สับ', 'โขลก', 'ปรุง', 'ตำ']
+    };
+    
+    // Step Data
+    const steps = [
+      {
+        name: 'สับ',
+        cardNumber: 6,
+        icon: '🔪',
+        poem: '"มีดคมกริบ จับมะละกอ<br>สับให้เป็นเส้น งามตา<br>นี่คือจุดเริ่มต้น แห่งรสชาติ"',
+        hint: 'มีด (8) + มะละกอ (2) = ?',
+        answer: '82',
+        cardReward: 84,
+        ingredients: ['🔪', '🥒']
+      },
+      {
+        name: 'โขลก',
+        cardNumber: 7,
+        icon: '🪨',
+        poem: '"พริกแดงสด กระเทียมหอม<br>โขลกรวมกัน ในครกหิน<br>กลิ่นหอมฟุ้ง ทั่วป่าใหญ่"',
+        hint: 'พริก (4) + กระเทียม (3) = ?',
+        answer: '43',
+        cardReward: 85,
+        ingredients: ['🌶️', '🧄']
+      },
+      {
+        name: 'ปรุง',
+        cardNumber: 8,
+        icon: '🫗',
+        poem: '"ปลาร้าแท้ น้ำมะนาวสด<br>น้ำตาลหวาน เติมลงไป<br>รสชาติครบ ถ้วนทุกอย่าง"',
+        hint: 'ปลาร้า (5) + น้ำมะนาว (9) + น้ำตาล (0) = ?',
+        answer: '590',
+        cardReward: 86,
+        ingredients: ['🐟', '🍋', '🍬']
+      },
+      {
+        name: 'ตำ',
+        cardNumber: 9,
+        icon: '🥢',
+        poem: '"ถั่วลิสงคั่ว เม็ดกรอบ<br>โปรยลงไป เป็นขั้นสุดท้าย<br>ส้มตำสำเร็จ สมบูรณ์แล้ว"',
+        hint: 'ถั่วลิสง (1) = ?',
+        answer: '1',
+        cardReward: 87,
+        ingredients: ['🥜']
+      }
+    ];
+    
+    // Functions
+    function startGame() {
+      document.getElementById('intro-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.remove('hidden');
+      updateStepDisplay();
+    }
+    
+    function selectStep(index) {
+      // Can only select current step or completed steps
+      if (index > gameState.currentStep && !gameState.completedSteps[index]) {
+        showFeedback('⚠️ ต้องทำขั้นตอนก่อนหน้าให้เสร็จก่อน!', 'text-orange-400');
+        return;
+      }
+      
+      if (gameState.completedSteps[index]) {
+        showFeedback('✅ ขั้นตอนนี้เสร็จสิ้นแล้ว!', 'text-green-400');
+        return;
+      }
+      
+      gameState.currentStep = index;
+      updateStepDisplay();
+    }
+    
+    function updateStepDisplay() {
+      const step = steps[gameState.currentStep];
+      
+      // Update step indicators
+      for (let i = 0; i < 4; i++) {
+        const indicator = document.getElementById(`step-${i + 1}`);
+        indicator.classList.remove('active', 'completed');
+        
+        if (gameState.completedSteps[i]) {
+          indicator.classList.add('completed');
+          indicator.style.opacity = '1';
+        } else if (i === gameState.currentStep) {
+          indicator.classList.add('active');
+          indicator.style.opacity = '1';
+        } else if (i > gameState.currentStep) {
+          indicator.style.opacity = '0.5';
+        }
+      }
+      
+      // Update current step info
+      document.getElementById('current-step-icon').textContent = step.icon;
+      document.getElementById('current-step-name').textContent = `ขั้นตอน: ${step.name}`;
+      document.getElementById('current-step-card').textContent = `การ์ดกลอนเลข ${step.cardNumber}`;
+      document.getElementById('poem-text').innerHTML = step.poem;
+      document.getElementById('hint-text').textContent = step.hint;
+      
+      // Clear input
+      document.getElementById('code-input').value = '';
+      
+      // Update mortar contents
+      updateMortarContents();
+      
+      // Hide feedback
+      document.getElementById('feedback').classList.add('hidden');
+    }
+    
+    function updateMortarContents() {
+      const container = document.getElementById('mortar-contents');
+      let html = '';
+      
+      for (let i = 0; i < gameState.currentStep; i++) {
+        if (gameState.completedSteps[i]) {
+          steps[i].ingredients.forEach(ing => {
+            html += `<span class="text-3xl ingredient-bounce" style="animation-delay: ${Math.random() * 0.5}s">${ing}</span>`;
+          });
+        }
+      }
+      
+      container.innerHTML = html || '<span class="text-amber-200/50 text-sm">ว่างเปล่า</span>';
+    }
+    
+    function submitCode() {
+      const input = document.getElementById('code-input');
+      const code = input.value.trim();
+      const step = steps[gameState.currentStep];
+      
+      if (!code) {
+        showFeedback('❌ กรุณาใส่รหัส!', 'text-red-400');
+        return;
+      }
+      
+      if (code === step.answer) {
+        // Success!
+        gameState.completedSteps[gameState.currentStep] = true;
+        gameState.collectedCards.push(step.cardReward);
+        
+        // Animate mortar
+        document.getElementById('mortar').classList.add('mortar-shake');
+        setTimeout(() => {
+          document.getElementById('mortar').classList.remove('mortar-shake');
+        }, 500);
+        
+        // Add ingredients to mortar
+        setTimeout(() => {
+          updateMortarContents();
+        }, 300);
+        
+        // Update collected cards display
+        updateCollectedCards();
+        
+        showFeedback(`✨ ถูกต้อง! ได้รับการ์ดชิ้นส่วนเลข ${step.cardReward}`, 'text-green-400');
+        
+        // Check if all steps completed
+        if (gameState.completedSteps.every(s => s)) {
+          setTimeout(() => {
+            showVictory();
+          }, 1500);
+        } else {
+          // Move to next step
+          setTimeout(() => {
+            gameState.currentStep++;
+            updateStepDisplay();
+          }, 1500);
+        }
+      } else {
+        showFeedback('❌ รหัสไม่ถูกต้อง ลองอีกครั้ง!', 'text-red-400');
+        input.value = '';
+      }
+    }
+    
+    function updateCollectedCards() {
+      const container = document.getElementById('collected-cards');
+      
+      if (gameState.collectedCards.length === 0) {
+        container.innerHTML = '<p class="text-amber-200/50 text-sm">ยังไม่มีการ์ด</p>';
+        return;
+      }
+      
+      let html = '';
+      gameState.collectedCards.forEach((card, index) => {
+        html += `
+          <div class="card-piece w-12 h-16 rounded-lg flex items-center justify-center success-burst" style="animation-delay: ${index * 0.1}s">
+            <span class="text-lg font-bold text-amber-900">${card}</span>
+          </div>
+        `;
+      });
+      
+      container.innerHTML = html;
+    }
+    
+    function showFeedback(message, colorClass) {
+      const feedback = document.getElementById('feedback');
+      const feedbackText = document.getElementById('feedback-text');
+      feedbackText.textContent = message;
+      feedbackText.className = `text-lg font-bold ${colorClass}`;
+      feedback.classList.remove('hidden');
+    }
+    
+    function showIngredientInfo(name, number) {
+      showFeedback(`${name} = ${number}`, 'text-yellow-400');
+    }
+    
+    function showVictory() {
+      document.getElementById('game-screen').classList.add('hidden');
+      document.getElementById('victory-screen').classList.remove('hidden');
+      createCelebrationParticles();
+    }
+    
+    function createCelebrationParticles() {
+      const container = document.getElementById('celebration-particles');
+      const emojis = ['✨', '🌟', '💫', '⭐', '🎉', '🎊', '🥗', '🌶️', '🥜'];
+      
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'absolute text-2xl';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `sparkle ${1 + Math.random() * 2}s ease-in-out infinite`;
+        particle.style.animationDelay = Math.random() * 2 + 's';
+        particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        container.appendChild(particle);
+      }
+    }
+    
+    function restartGame() {
+      // Reset game state
+      gameState.currentStep = 0;
+      gameState.completedSteps = [false, false, false, false];
+      gameState.collectedCards = [];
+      
+      // Clear celebration particles
+      document.getElementById('celebration-particles').innerHTML = '';
+      
+      // Show intro screen
+      document.getElementById('victory-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.add('hidden');
+      document.getElementById('intro-screen').classList.remove('hidden');
+      
+      // Reset collected cards display
+      updateCollectedCards();
+    }
+    
+    // Handle Enter key on input
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('code-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          submitCode();
+        }
+      });
+      
+      applyConfig();
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d33a566c73ad330',t:'MTc3MTk4NTIxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
