@@ -189,9 +189,7 @@
        <div class="text-xs text-white font-bold">
         สับ
        </div>
-       <div class="text-xs text-yellow-200">
-        (การ์ด 6)
-       </div>
+       
       </div>
       <div id="step-2" class="step-indicator w-20 md:w-24 py-2 rounded-lg text-center cursor-pointer transition-all opacity-50" onclick="selectStep(1)">
        <div class="text-xl md:text-2xl">
@@ -200,9 +198,7 @@
        <div class="text-xs text-white font-bold">
         โขลก
        </div>
-       <div class="text-xs text-yellow-200">
-        (การ์ด 7)
-       </div>
+       
       </div>
       <div id="step-3" class="step-indicator w-20 md:w-24 py-2 rounded-lg text-center cursor-pointer transition-all opacity-50" onclick="selectStep(2)">
        <div class="text-xl md:text-2xl">
@@ -211,9 +207,7 @@
        <div class="text-xs text-white font-bold">
         ปรุง
        </div>
-       <div class="text-xs text-yellow-200">
-        (การ์ด 8)
-       </div>
+       
       </div>
       <div id="step-4" class="step-indicator w-20 md:w-24 py-2 rounded-lg text-center cursor-pointer transition-all opacity-50" onclick="selectStep(3)">
        <div class="text-xl md:text-2xl">
@@ -222,9 +216,7 @@
        <div class="text-xs text-white font-bold">
         ตำ
        </div>
-       <div class="text-xs text-yellow-200">
-        (การ์ด 9)
-       </div>
+       
       </div>
      </div>
      <div class="grid md:grid-cols-2 gap-6"><!-- Left: Poem & Input -->
@@ -233,7 +225,6 @@
         <div class="flex items-center gap-3 mb-3"><span id="current-step-icon" class="text-4xl">🔪</span>
          <div>
           <h3 id="current-step-name" class="title-font text-xl text-yellow-400 font-bold">ขั้นตอน: สับ</h3>
-          <p id="current-step-card" class="text-amber-200 text-sm">การ์ดกลอนเลข 6</p>
          </div>
         </div><!-- Poem Scroll -->
         <div id="poem-scroll" class="poem-scroll rounded-xl p-4 mb-4">
@@ -269,9 +260,7 @@
           <div class="text-xs font-bold text-amber-900">
            พริก
           </div>
-          <div class="text-lg font-bold text-red-600">
-           4
-          </div>
+          
          </div>
          <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('กระเทียม', 3)">
           <div class="text-2xl">
@@ -280,9 +269,7 @@
           <div class="text-xs font-bold text-amber-900">
            กระเทียม
           </div>
-          <div class="text-lg font-bold text-red-600">
-           3
-          </div>
+         
          </div>
          <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('ปลาร้า', 5)">
           <div class="text-2xl">
@@ -291,9 +278,7 @@
           <div class="text-xs font-bold text-amber-900">
            ปลาร้า
           </div>
-          <div class="text-lg font-bold text-red-600">
-           5
-          </div>
+          
          </div>
          <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('น้ำมะนาว', 9)">
           <div class="text-2xl">
@@ -302,9 +287,7 @@
           <div class="text-xs font-bold text-amber-900">
            น้ำมะนาว
           </div>
-          <div class="text-lg font-bold text-red-600">
-           9
-          </div>
+          
          </div>
          <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('น้ำตาล', 0)">
           <div class="text-2xl">
@@ -313,9 +296,7 @@
           <div class="text-xs font-bold text-amber-900">
            น้ำตาล
           </div>
-          <div class="text-lg font-bold text-red-600">
-           0
-          </div>
+          
          </div>
          <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('มะละกอ', 2)">
           <div class="text-2xl">
@@ -324,9 +305,7 @@
           <div class="text-xs font-bold text-amber-900">
            มะละกอ
           </div>
-          <div class="text-lg font-bold text-red-600">
-           2
-          </div>
+          
          </div>
          <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('ถั่วลิสง', 1)">
           <div class="text-2xl">
@@ -335,9 +314,7 @@
           <div class="text-xs font-bold text-amber-900">
            ถั่วลิสง
           </div>
-          <div class="text-lg font-bold text-red-600">
-           1
-          </div>
+          
          </div>
          <div class="ingredient-card rounded-lg p-2 text-center cursor-pointer" onclick="showIngredientInfo('มีด', 8)">
           <div class="text-2xl">
@@ -346,9 +323,7 @@
           <div class="text-xs font-bold text-amber-900">
            มีด
           </div>
-          <div class="text-lg font-bold text-red-600">
-           8
-          </div>
+          
          </div>
         </div>
        </div><!-- Collected Cards -->
@@ -372,9 +347,8 @@
        ครกศักดิ์สิทธิ์ส่องแสงเจิดจ้า</p><!-- Final Code Display -->
      <div class="final-code-display rounded-2xl p-6 mb-6">
       <p class="text-amber-200 text-sm mb-2">รหัสปลดล็อกกล่อง</p>
-      <div class="flex justify-center gap-2"><span class="text-5xl md:text-6xl font-bold text-yellow-400 title-font">1</span> <span class="text-5xl md:text-6xl font-bold text-yellow-400 title-font">2</span> <span class="text-5xl md:text-6xl font-bold text-yellow-400 title-font">7</span>
-      </div>
-      <p class="text-amber-200 text-xs mt-2">( 84 + 85 + 86 + 87 = 342 → หลักหน่วยคือ 127 )</p>
+      <div class="flex justify-center gap-2"><span class="text-5xl md:text-6xl font-bold text-yellow-400 title-font">รหัสเปิดกล่องได้จากการประกอบการ์ดที่สะสม</span> 
+      
      </div><!-- Collected Cards Summary -->
      <div class="mystical-card rounded-2xl p-4 mb-6">
       <h4 class="text-yellow-400 font-bold mb-3">การ์ดที่สะสมได้ทั้งหมด</h4>
@@ -444,8 +418,8 @@
         name: 'สับ',
         cardNumber: 6,
         icon: '🔪',
-        poem: '"มีดคมกริบ จับมะละกอ<br>สับให้เป็นเส้น งามตา<br>นี่คือจุดเริ่มต้น แห่งรสชาติ"',
-        hint: 'มีด (8) + มะละกอ (2) = ?',
+        poem: '"มีดคมคัก ฟันดังฉับ<br>มะละกอขาวกรอบ นำมาสับ<br>จัดให้เป็นเส้นงามตา<br>ก่อนสิพาไปตำแซ่บหลาย"',
+        hint: 'ดูวัตถุดิบที่กล่าวถึงในกลอน แล้วนำตัวเลขมาเรียงตามลำดับ',
         answer: '82',
         cardReward: 84,
         ingredients: ['🔪', '🥒']
@@ -454,8 +428,8 @@
         name: 'โขลก',
         cardNumber: 7,
         icon: '🪨',
-        poem: '"พริกแดงสด กระเทียมหอม<br>โขลกรวมกัน ในครกหิน<br>กลิ่นหอมฟุ้ง ทั่วป่าใหญ่"',
-        hint: 'พริก (4) + กระเทียม (3) = ?',
+        poem: '"พริกแดงแสบตาเด้<br>กระเทียมหอมมาเคียงใกล้<br>ใส่ครกแล้วโขลกไป<br>ให้แซ่บหลายถึงใจแท้"',
+        hint: 'ในชั้นตอนนี้ ทำอะไรบ้าง',
         answer: '43',
         cardReward: 85,
         ingredients: ['🌶️', '🧄']
@@ -464,8 +438,8 @@
         name: 'ปรุง',
         cardNumber: 8,
         icon: '🫗',
-        poem: '"ปลาร้าแท้ น้ำมะนาวสด<br>น้ำตาลหวาน เติมลงไป<br>รสชาติครบ ถ้วนทุกอย่าง"',
-        hint: 'ปลาร้า (5) + น้ำมะนาว (9) + น้ำตาล (0) = ?',
+        poem: '"ปลาร้าหอมลอยมา<br>น้ำมะนาวซ่าพาใจสั่น<br>เติมน้ำตาลหวานมัน<br>ปรุงให้มันพอดีแซ่บ"',
+        hint: 'ใช้อะไรบ้าง ในการปรุงรส',
         answer: '590',
         cardReward: 86,
         ingredients: ['🐟', '🍋', '🍬']
@@ -474,8 +448,8 @@
         name: 'ตำ',
         cardNumber: 9,
         icon: '🥢',
-        poem: '"ถั่วลิสงคั่ว เม็ดกรอบ<br>โปรยลงไป เป็นขั้นสุดท้าย<br>ส้มตำสำเร็จ สมบูรณ์แล้ว"',
-        hint: 'ถั่วลิสง (1) = ?',
+        poem: '"ถั่วลิสงคั่วใหม่<br>ใส่ลงไปในครกใบเก่า<br>ตำเบาๆ อย่าแรงเด้อ<br>ให้มันหอมคือเก่าแซ่บ"',
+        hint: 'เป็นวัตถุดิบที่ใส่ขั้นตอนสุดท้าย',
         answer: '1',
         cardReward: 87,
         ingredients: ['🥜']
@@ -527,7 +501,7 @@
       // Update current step info
       document.getElementById('current-step-icon').textContent = step.icon;
       document.getElementById('current-step-name').textContent = `ขั้นตอน: ${step.name}`;
-      document.getElementById('current-step-card').textContent = `การ์ดกลอนเลข ${step.cardNumber}`;
+      //document.getElementById('current-step-card').textContent = `การ์ดกลอนเลข ${step.cardNumber}`;
       document.getElementById('poem-text').innerHTML = step.poem;
       document.getElementById('hint-text').textContent = step.hint;
       
